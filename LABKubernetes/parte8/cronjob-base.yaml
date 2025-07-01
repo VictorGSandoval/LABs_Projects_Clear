@@ -1,0 +1,57 @@
+# PARTE 8: CRONJOB
+# ================
+# 
+# OBJETIVO: Crear CronJob que verifique salud del Service A
+# 
+# TAREAS:
+# 1. Configurar schedule cada minuto
+# 2. Implementar script de verificación
+# 3. Configurar políticas de concurrencia
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: health-check-cronjob
+  labels:
+    app: health-checker
+spec:
+  schedule: "*/1 * * * *"  # TODO: Configurar schedule
+  concurrencyPolicy: Forbid  # TODO: Configurar política
+  successfulJobsHistoryLimit: 3  # TODO: Configurar límite
+  failedJobsHistoryLimit: 1      # TODO: Configurar límite
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: health-checker
+            image: busybox:latest
+            command:
+            - /bin/sh
+            - -c
+            - |
+              # TODO: Implementar script de verificación de salud
+              # El script debe:
+              # 1. Hacer curl/wget a http://service-a:8089/prueba
+              # 2. Mostrar mensaje de éxito o error
+              # 3. Usar exit 0 para éxito, exit 1 para fallo
+              echo "Implementar script aquí..."
+            resources:
+              requests:
+                cpu: "10m"
+                memory: "16Mi"
+              limits:
+                cpu: "50m"
+                memory: "32Mi"
+          restartPolicy: OnFailure  # TODO: Configurar política
+          backoffLimit: 2  # TODO: Configurar límite
+
+# PISTAS:
+# - Usar wget con timeout para evitar que se cuelgue
+# - Usar exit 0 para éxito, exit 1 para fallo
+# - El CronJob debe ser independiente (no depender de otros recursos)
+# 
+# EJEMPLO DE SCHEDULE:
+# */1 * * * * = cada minuto
+# */5 * * * * = cada 5 minutos
+# 0 */1 * * * = cada hora 

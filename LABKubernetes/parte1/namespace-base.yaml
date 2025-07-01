@@ -1,0 +1,23 @@
+# PARTE 1: NAMESPACE (BASE)
+# =========================
+# TODO: Completa el nombre y los labels del namespace
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: # TODO
+  labels:
+    # TODO
+
+# PARTE 1: NAMESPACE Y CONFIGURACIÓN BASE
+# =======================================
+# 
+# OBJETIVO: Crear namespace lab-kubernetes
+# 
+# TAREAS:
+# 1. Crear namespace con nombre correcto
+# 2. Agregar labels apropiados
+# 
+# COMANDOS A EJECUTAR:
+# kubectl apply -f namespace-base.yaml
+# kubectl config set-context --current --namespace=lab-kubernetes 

@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: load-generator
+  labels:
+    app: load-generator
+spec:
+  template:
+    spec:
+      containers:
+      - name: load-generator
+        image: busybox:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          echo "Generando carga en el servicio..."
+          for i in {1..100}; do
+            wget -q -O- http://service-a:8089/prueba > /dev/null 2>&1 &
+            sleep 0.1
+          done
+          echo "Carga generada. Esperando 30 segundos..."
+          sleep 30
+          echo "Generando más carga..."
+          for i in {1..200}; do
+            wget -q -O- http://service-a:8089/prueba > /dev/null 2>&1 &
+            sleep 0.05
+          done
+          echo "Carga finalizada"
+      restartPolicy: Never
+  backoffLimit: 1 

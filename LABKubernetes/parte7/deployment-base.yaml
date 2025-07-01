@@ -1,0 +1,61 @@
+# PARTE 7: SERVICIO B - MICROSERVICIO CLIENTE
+# ===========================================
+# 
+# OBJETIVO: Crear servicio cliente que se comunique con Service A
+# 
+# TAREAS:
+# 1. Implementar script de verificación de conectividad
+# 2. Configurar loop continuo cada 30 segundos
+# 3. Mostrar mensajes de éxito o error
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-b
+  labels:
+    app: deploy-b
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deploy-b
+  template:
+    metadata:
+      labels:
+        app: deploy-b
+    spec:
+      containers:
+      - name: client-container
+        image: busybox:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          # TODO: Implementar script de verificación de conectividad
+          # El script debe:
+          # 1. Hacer curl/wget a http://service-a:8089/prueba
+          # 2. Mostrar mensaje de éxito o error
+          # 3. Repetir cada 30 segundos
+          echo "Implementar script aquí..."
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "64Mi"
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-b
+  labels:
+    app: deploy-b
+spec:
+  type: ClusterIP
+  selector:
+    app: deploy-b
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP 

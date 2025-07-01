@@ -1,0 +1,80 @@
+# PARTE 6: BLUE/GREEN DEPLOYMENT (BASE)
+# =====================================
+# TODO: Implementar estrategia Blue/Green sin downtime
+
+# Blue Deployment (v1) - Activo
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: # TODO
+  labels:
+    app: # TODO
+    version: # TODO
+    environment: # TODO
+spec:
+  replicas: # TODO
+  selector:
+    matchLabels:
+      app: # TODO
+      version: # TODO
+  template:
+    metadata:
+      labels:
+        app: # TODO
+        version: # TODO
+        environment: # TODO
+    spec:
+      containers:
+      - name: # TODO
+        image: # TODO
+        ports:
+        - containerPort: # TODO
+        # TODO: Agregar envFrom con ConfigMap
+        # TODO: Agregar recursos y probes
+---
+# Green Deployment (v2) - Inactivo
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: # TODO
+  labels:
+    app: # TODO
+    version: # TODO
+    environment: # TODO
+spec:
+  replicas: # TODO
+  selector:
+    matchLabels:
+      app: # TODO
+      version: # TODO
+  template:
+    metadata:
+      labels:
+        app: # TODO
+        version: # TODO
+        environment: # TODO
+    spec:
+      containers:
+      - name: # TODO
+        image: # TODO
+        ports:
+        - containerPort: # TODO
+        # TODO: Agregar envFrom con ConfigMap
+        # TODO: Agregar recursos y probes
+---
+# Service que apunta a Blue (v1) por defecto
+apiVersion: v1
+kind: Service
+metadata:
+  name: # TODO
+  labels:
+    app: # TODO
+spec:
+  type: # TODO
+  selector:
+    app: # TODO
+    version: # TODO
+  ports:
+  - port: # TODO
+    targetPort: # TODO
+    nodePort: # TODO 

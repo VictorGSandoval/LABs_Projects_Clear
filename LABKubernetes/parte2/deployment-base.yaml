@@ -1,0 +1,39 @@
+# PARTE 2: DEPLOYMENT Y SERVICE (BASE)
+# ====================================
+# TODO: Completa los valores necesarios para el deployment y el service
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: # TODO
+spec:
+  replicas: # TODO
+  selector:
+    matchLabels:
+      app: # TODO
+  template:
+    metadata:
+      labels:
+        app: # TODO
+    spec:
+      containers:
+      - name: # TODO
+        image: # TODO
+        ports:
+        - containerPort: # TODO
+        env:
+        - name: PORT
+          value: # TODO
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: # TODO
+spec:
+  type: NodePort
+  selector:
+    app: # TODO
+  ports:
+  - port: # TODO
+    targetPort: # TODO
+    nodePort: # TODO 

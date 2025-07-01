@@ -1,0 +1,36 @@
+# PARTE 4: CONFIGMAP (BASE)
+# =========================
+# TODO: Completa el ConfigMap y usa envFrom en el deployment
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: # TODO
+  labels:
+    # TODO
+# TODO: Agrega los datos necesarios
+
+data:
+  PORT: # TODO
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-a
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deploy-a
+  template:
+    metadata:
+      labels:
+        app: deploy-a
+    spec:
+      containers:
+      - name: app-container
+        image: gova731/dockerlab:3.0
+        ports:
+        - containerPort: 8089
+        # TODO: Usar envFrom con el ConfigMap
+        # TODO: Eliminar variable hardcodeada 

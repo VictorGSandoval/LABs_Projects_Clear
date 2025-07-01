@@ -1,0 +1,48 @@
+# KUSTOMIZE BASE - PARTE 10
+# =========================
+# 
+# Este archivo evoluciona conforme avanzas en el laboratorio
+# 
+# PARTE 1: Solo namespace
+# PARTE 2: + deployment y service
+# PARTE 3: + health checks
+# PARTE 4: + configmap
+# PARTE 5: + HPA
+# PARTE 7: + service B
+# PARTE 8: + cronjob
+# PARTE 9: + blue/green deployment
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+metadata:
+  name: kubernetes-lab-base
+  namespace: lab-kubernetes
+
+# Recursos base (evoluciona por partes)
+resources:
+  # TODO: Agregar recursos conforme avances en el laboratorio
+  # - ../parte1/namespace-completo.yaml
+  # - ../parte2/deployment-completo.yaml
+  # - ../parte3/deployment-completo.yaml
+  # - ../parte4/configmap-completo.yaml
+  # - ../parte5/hpa-completo.yaml
+  # - ../parte7/deployment-completo.yaml
+  # - ../parte8/cronjob-completo.yaml
+  # - ../parte9/deployment-completo.yaml
+
+# Configuraciones comunes
+commonLabels:
+  project: kubernetes-lab
+  environment: development
+  version: 1.0
+
+# Configuraciones de namespace
+namespace: lab-kubernetes
+
+# Configuraciones de imágenes
+images:
+  - name: gova731/dockerlab
+    newTag: "3.0"
+  - name: busybox
+    newTag: "latest" 

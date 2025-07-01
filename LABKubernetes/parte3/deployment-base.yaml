@@ -1,0 +1,39 @@
+# PARTE 3: HEALTH CHECKS (BASE)
+# ============================
+# TODO: Agrega los probes necesarios
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-a
+  labels:
+    app: deploy-a
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deploy-a
+  template:
+    metadata:
+      labels:
+        app: deploy-a
+        version: v1
+    spec:
+      containers:
+      - name: app-container
+        image: gova731/dockerlab:3.0
+        ports:
+        - containerPort: 8089
+        env:
+        - name: PORT
+          value: "8089"
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+        # TODO: Agregar livenessProbe
+        # TODO: Agregar readinessProbe 
